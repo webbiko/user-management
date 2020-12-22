@@ -26,6 +26,68 @@ Before proceeding it is needed that you have installed on your machine the follo
 
 ---
 
+## Env variables
+
+In order to execute this project smoothly it is necessary to create a a file called **.env-cmdrc** with the following structure:
+
+```json
+{
+  "development": {
+    "NODE_ENV": "development",
+    "SERVICE_PORT": 3004,
+    "TOKEN_SERVICE_URL": "localhost",
+    "TOKEN_SERVICE_PORT": 3002,
+    "SEND_EMAIL": false,
+    "API_RATE_LIMIT": 1000000
+  },
+  "stage": {
+    "NODE_ENV": "stage",
+    "SERVICE_PORT": 3004,
+    "EMAIL_USER": "",
+    "EMAIL_PASSWORD": "",
+    "TOKEN_SERVICE_URL": "localhost",
+    "TOKEN_SERVICE_PORT": 3002,
+    "SEND_EMAIL": true,
+    "API_RATE_LIMIT": 10
+  },
+  "test": {
+    "NODE_ENV": "test",
+    "SERVICE_PORT": 3004,
+    "TOKEN_SERVICE_URL": "localhost",
+    "TOKEN_SERVICE_PORT": 3002,
+    "SEND_EMAIL": false,
+    "API_RATE_LIMIT": 1000000
+  },
+  "production": {
+    "NODE_ENV": "production",
+    "SERVICE_PORT": 3004,
+    "EMAIL_USER": "",
+    "EMAIL_PASSWORD": "",
+    "TOKEN_SERVICE_URL": "localhost",
+    "TOKEN_SERVICE_PORT": 3002,
+    "SEND_EMAIL": true,
+    "API_RATE_LIMIT": 10,
+    "NEWRELIC_TOKEN": "yourNewRelicToken",
+    "NEW_RELIC_LOG_LEVEL": "error"
+  }
+}
+
+```
+
+Also a file called **.sequelizerc** is required with the following structure:
+
+```javascript
+const path = require('path');
+
+module.exports = {
+    'config': path.resolve('./app/db/config', 'config.json'),
+    'models-path': path.resolve('./app', 'models'),
+    'seeders-path': path.resolve('./app/db', 'seeders'),
+    'migrations-path': path.resolve('./app/db', 'migrations')
+};
+```
+---
+
 ## Running the project in development mode
 
 In order to run the project in development mode it is required to execute the steps below:
@@ -92,17 +154,5 @@ It only monitors production environment and it was tested pointing to developmen
 Check it out: https://login.newrelic.com/login?
 Username: someemail@gmail.com
 Password: *******
-
----
-
-## Known issues
-
-Currently there is a small bug that was not possible to fix so far.
-
-**Scenario**: Calling app /api/v0/acronyms/random/:count i wanna receive random acronyms that are not adjacent to each data.
-**Expected Result**: Acronyms are sent back to the caller and no of them are adjacents to each other.
-**Actuial Result**: Since the strategy chosen for returning random data from DB it was random items with skip option it was causing the data to sometimes be adjacent and I still need to fix it.
-
-**Side Effect**: Some tests are failing because of this bug.
 
 ---
