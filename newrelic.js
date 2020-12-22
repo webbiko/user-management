@@ -37,7 +37,7 @@ exports.config = {
      * production applications.
      */
     level: 'info',
-    filepath: "/var/g2i/logs/service/user-management/newrelic_agent.log"
+    filepath: "/var/mb/logs/service/user-management/newrelic_agent.log"
   },
   /**
    * When true, all request headers except for those listed in attributes.exclude
