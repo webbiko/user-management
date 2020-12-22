@@ -1,0 +1,30 @@
+{
+  "development": {
+    "username": "root",
+    "password": "root",
+    "database": "dev",
+    "host": "<ip-address>",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "root",
+    "database": "test",
+    "host": "<ip-address>",
+    "dialect": "mysql"
+  },
+  "stage": {
+    "username": "root",
+    "password": "root",
+    "database": "stage",
+    "host": "172.22.0.6",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "root",
+    "database": "production",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}
